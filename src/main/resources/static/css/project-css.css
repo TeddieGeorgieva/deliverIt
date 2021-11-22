@@ -1,0 +1,86 @@
+.items-table {
+    margin: 150px;
+}
+.login-form {
+    display: inline-block;
+    margin: 150px;
+}
+
+.new-shipment-form {
+    margin: 150px;
+}
+.warehouses {
+    margin: 150px;
+}
+.shipment {
+    margin: 150px;
+}
+
+.warehouse {
+    margin: 150px;
+}
+.parcel {
+    margin: 150px;
+}
+.reg-form {
+    display: inline-block;
+    margin: 150px;
+}
+
+.form {
+    width: 45%;
+    margin: auto;
+    text-align: center;
+}
+
+.search-form {
+    margin:auto;
+    width: 60%;
+    padding: 10px;
+    text-align: center;
+}
+.search-input {
+    display: inline-block;
+    width: 40%;
+}
+.search-input-form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+}
+
+.search-all {
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.error-fields {
+    color: red;
+}
+
+.margin-top {
+    margin-top: 150px;
+}
+
+.float-left {
+    float: left;
+}
+.container-button {
+    position: relative;
+    margin-top: 3%;
+}
+
+.center-button {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.customers-search {
+    width: 50%;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="Parcel + ' ' + ${parcel.getId()}">Single parcel</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div class="items-table">
+    <a href="#" class="btn btn-warning" role=button th:href="@{/parcels}" th:text="#{navigation.back-to-all}">back</a>
+
+    <br>
+    <br>
+
+    <h2 th:text="Parcel + ' ' + ${parcel.getId()}">parcel</h2>
+
+    <table class="table table-hover">
+        <tr>
+            <th scope="col" th:text="#{parcel.label.id}">#</th>
+            <th th:href="${parcel.getId()}" th:text="${parcel.id}">Parcel Id</th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.customer-username}">Purchaser</th>
+            <th th:text="${parcel.getPurchaser().getUsername()}">Purchaser</th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.customer-name}">Purchaser</th>
+            <th th:text="${parcel.getPurchaser().getFirstName() + ' ' + parcel.getPurchaser().getLastName()}">
+            </th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.customer-email}">Purchaser email</th>
+            <th th:text="${parcel.getPurchaser().getEmail()}">
+            </th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.weight}">Weight</th>
+            <th th:text="${parcel.getWeight()}">Weight</th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.destination-warehouse}">Destination Warehouse</th>
+            <th th:text="${parcel.getDestinationWarehouse().getAddress().getStreetName()
+            + ', ' + parcel.getDestinationWarehouse().getAddress().getCity().getName()
+            + ', ' + parcel.getDestinationWarehouse().getAddress().getCity().getCountry().getName()}">Destination warehousе
+            </th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.category}">Category</th>
+            <th th:text="${parcel.getCategory().getName()}">Category</th>
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>
+            <td th:text="${parcel.getDeliveryType()}">Delivery Type</td>
+
+        </tr>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.shipment-id}">Shipment id</th>
+            <td th:if="${!parcel.getShipments().isEmpty()}" th:text="${parcel.getShipments().get(0).getId()}">Shipment id</td>
+            <td th:if="${parcel.getShipments().isEmpty()}" th:text="#{parcel.label.no-shipment}">No shipment</td>
+        </tr>
+        <tr th:if="${!parcel.getShipments().isEmpty()}">
+            <th scope="col" th:text="#{parcel.label.shipment-arrival}">Shipment arrival</th>
+            <td th:text="${parcel.getShipments().get(0).getArrivalDate()}">Shipment arrival</td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="#" class="btn btn-warning" role=button th:href="@{__${#httpServletRequest.requestURI}__/update}" th:text="#{navigation.update-parcel}">Update</a>
+    <a href="#" th:if="${parcel.getShipments().isEmpty()}" class="btn btn-warning" role=button th:href="@{__${#httpServletRequest.requestURI}__/delete}" th:text="#{navigation.delete-parcel}">Delete</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shipment</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div class="shipment">
+    <h3>Shipment preview</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{shipment.label.status}">#</th>
+            <th scope="col" th:text="#{shipment.label.origin-warehouse}">Origin Warehouse</th>
+            <th scope="col" th:text="#{shipment.label.destination-warehouse}">Destination warehouse</th>
+            <th scope="col" th:text="#{shipment.label.departure-date}">Departure date</th>
+            <th scope="col" th:text="#{shipment.label.arrival-date}">Arrival date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><span th:text="${shipment.status}"></span></td>
+            <td><span th:text="${originWarehouse}"></span></td>
+            <td><span th:text="${destinationWarehouse}"></span></td>
+            <td><span th:text="${shipment.departureDate}"></span></td>
+            <td><span th:text="*{shipment.arrivalDate}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div th:if="${parcels.isEmpty()}">
+        <h2 th:text="#{parcels.title.empty}">No Parcels</h2>
+    </div>
+    <table class="table" th:unless="${parcels.isEmpty()}">
+        <h3>Parcels in this shipment</h3>
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.id}">#</th>
+            <th scope="col" th:text="#{parcel.label.customer-name}">Purchaser</th>
+            <th scope="col" th:text="#{parcel.label.category}">Departure date</th>
+            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>
+            <th scope="col" th:text="#{parcel.label.weight}">Arrival date</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="parcel: ${parcels}">
+            <td><span th:text="${parcel.id}"></span></td>
+            <td>
+                <span th:text="${parcel.purchaser.firstName}"></span>
+                <span th:text="${parcel.purchaser.lastName}"></span>
+            </td>
+            <td><span th:text="${parcel.category.name}"></span></td>
+            <td><span th:text="${parcel.deliveryType.toString()}"></span></td>
+            <td><span th:text="*{parcel.weight}"></span></td>
+            <td><a href="#" class="btn btn-warning" role=button
+                   th:href="@{delete/{shipmentId}/{parcelId}(shipmentId=${shipment.getId()}, parcelId=${parcel.id})}"
+                   th:text="#{shipment.remove-parcel}">remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments}"
+           th:text="#{navigation.back-to-all}">Back to All</a></td>
+    <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments/update/{id}(id=${shipment.id})}"
+           th:text="#{navigation.update-shipment}">Update</a></td>
+    <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments/{id}/delete(id=${shipment.id})}"
+           th:text="#{navigation.delete-shipment}">Delete</a></td>
+
+</div>
+</body>
+</html>

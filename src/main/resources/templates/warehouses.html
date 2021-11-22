@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouses</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div th:if="${warehouses.isEmpty()}">
+<h2 th:text="#{warehouses.title.empty}">No Warehouses</h2>
+</div>
+<div class="warehouses" th:unless="${warehouses.isEmpty()}">
+    <h2 th:text="#{warehouses.title}">All Warehouses</h2>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{warehouse.label.id}">#</th>
+            <th scope="col" th:text="#{warehouse.address.country}">Country</th>
+            <th scope="col" th:text="#{warehouse.address.city}">City</th>
+            <th scope="col" th:text="#{warehouse.address.street-name}">street</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody th:each="warehouse : ${warehouses}">
+        <tr>
+            <td th:href="@{/warehouse/{id}(id=${warehouse.getId()})}" th:text="${warehouse.id}">Warehouse Id</td>
+            <td th:text="${warehouse.getAddress().getCity().getCountry().getName()}">Country</td>
+            <td th:text="${warehouse.getAddress().getCity().getName()}">City</td>
+            <td th:text="${warehouse.getAddress().getStreetName()}">street</td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{/warehouses/{id}(id=${warehouse.getId()})}" th:text="#{navigation.view-warehouse}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="btn btn-warning" role=button th:href="@{/warehouses/new}" th:text="#{navigation.create-warehouse}">Create a new warehouse</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Shipment</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar-fragment"></div>
+
+
+<form class="shipment" th:action="@{__${#httpServletRequest.requestURI}__}" th:object="${shipment}" method="post">
+    <h3>New Shipment</h3>
+
+    <div class="form-group">
+        <label for="departureDate">Departure date</label>
+        <input class="form-control" id="departureDate" type="date" th:field="*{departureDate}">
+    </div>
+    <div class="form-group">
+        <label for="arrivalDate">Arrival date</label>
+        <input class="form-control" id="arrivalDate" type="date" th:field="*{arrivalDate}">
+    </div>
+
+    <div class="form-group">
+        <label for="originWarehouse">Origin warehouse</label>
+        <select class="form-control" id="originWarehouse" th:field="*{originWarehouseId}">
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="destinationWarehouse">Destination warehouse</label>
+        <select class="form-control" id="destinationWarehouse" th:field="*{destinationWarehouseId}">
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+</body>
+</html>

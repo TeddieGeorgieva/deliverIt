@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Parcels</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+<div th:if="${myParcels.isEmpty()}">
+    <h2 th:text="#{parcels.empty}">No parcels</h2>
+</div>
+
+<div class="items-table">
+    <div th:if="${currentParcels.isEmpty()}">
+        <h2 th:text="#{parcels.empty}">No parcels</h2>
+    </div>
+    <h2 th:unless="${currentParcels.isEmpty()}" th:text="#{myParcels.title}">My parcels</h2>
+
+    <table class="table table-hover" th:unless="${currentParcels.isEmpty()}">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.customer-username}">Purchaser</th>
+            <th scope="col" th:text="#{parcel.label.weight}">Weight</th>
+            <th scope="col" th:text="#{parcel.label.destination-warehouse}">Destination Warehouse</th>
+            <th scope="col" th:text="#{parcel.label.category}">Category</th>
+            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>
+            <th scope="col" th:text="#{parcel.label.shipment-status}">status</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody th:each="parcel : ${currentParcels}">
+        <tr>
+            <td th:text="${parcel.getPurchaser().getUsername()}">Purchaser</td>
+            <td th:text="${parcel.getWeight()}">Weight</td>
+            <td th:text="${parcel.getDestinationWarehouse().getAddress().getCity().getName()}">Destination warehousе
+            </td>
+            <td th:text="${parcel.getCategory().getName()}">Category</td>
+            <td th:text="${parcel.getDeliveryType()}">Delivery Type</td>
+            <td th:unless="${parcel.getShipments().isEmpty()}" th:text="${parcel.getShipments().get(0).getStatus().toString()}">status</td>
+            <td th:if="${parcel.getShipments().isEmpty()}" th:text="#{parcel.label.no-shipment}">status</td>
+            <td><a class="btn btn-warning" role=button  th:text="#{navigation.update-parcel}"
+                   th:href="@{/parcels/my/{id}/update(id=${parcel.getId()})}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <h2 th:unless="${pastParcels.isEmpty()}" th:text="#{parcels.past.title}">Past parcels</h2>
+    <table class="table table-hover" th:unless="${pastParcels.isEmpty()}">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.id}">#</th>
+            <th scope="col" th:text="#{parcel.label.customer-username}">Purchaser</th>
+            <th scope="col" th:text="#{parcel.label.weight}">Weight</th>
+            <th scope="col" th:text="#{parcel.label.destination-warehouse}">Destination Warehouse</th>
+            <th scope="col" th:text="#{parcel.label.category}">Category</th>
+            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>
+            <th scope="col" th:text="#{parcel.label.shipment-status}">status</th>
+
+        </tr>
+        </thead>
+        <tbody th:each="parcel : ${pastParcels}">
+        <tr>
+            <td th:text="${parcel.id}">Parcel Id</td>
+            <td th:text="${parcel.getPurchaser().getUsername()}">Purchaser</td>
+            <td th:text="${parcel.getWeight()}">Weight</td>
+            <td th:text="${parcel.getDestinationWarehouse().getAddress().getCity().getName()}">Destination warehousе
+            </td>
+            <td th:text="${parcel.getCategory().getName()}">Category</td>
+            <td th:text="${parcel.getDeliveryType()}">Delivery Type</td>
+            <td th:text="${parcel.getShipments().get(0).getStatus().toString()}">status</td>
+<!--            <td><a href="#" class="btn btn-warning" role=button th:text="#{navigation.view-parcel}" th:href="@{/parcels/{id}(id=${parcel.getId()})}">Edit</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+<!--    <a href="#" class="btn btn-warning" role=button th:href="@{/parcels/new}" th:text="#{navigation.create-parcel}">Create-->
+<!--        a new parcel</a>-->
+
+</div>
+</body>
+</html>

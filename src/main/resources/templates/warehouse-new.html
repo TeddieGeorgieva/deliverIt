@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New warehouse</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar-fragment"></div>
+
+<div class="items-table">
+    <form th:action="@{__${#httpServletRequest.requestURI}__}" th:object="${warehouse}" method="post">
+        <h3>New Warehouse</h3>
+
+        <div class="form-group">
+            <label for="address">Choose Address</label>
+            <select class="form-control" id="address" th:field="*{addressId}">
+                <option th:each="address : ${addresses}" th:value="${address.value}"
+                        th:text="${address.key}"></option>
+            </select>
+        </div>
+
+    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</div>
+</body>
+</html>

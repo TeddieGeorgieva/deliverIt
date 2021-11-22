@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+<div class="form">
+<form class="login-form" action="#" th:action="@{/auth/login}" th:object="${login}" method="post">
+    <h2>Login</h2>
+    <br/>
+
+    <label th:text="#{user.label.username}">Username</label>
+    <br/>
+    <label>
+        <input type="text" th:field="*{username}"/>
+    </label>
+    <br>
+    <label class="error error-fields" th:errors="*{username}">Username error placeholder</label>
+    <br/><br/>
+
+    <label th:text="#{user.label.password}">Password</label>
+    <br/>
+    <label>
+        <input type="password" th:field="*{password}"/>
+    </label>
+    <br>
+    <label class="error error-fields" th:errors="*{password}">Username error placeholder</label>
+    <br/><br/>
+
+    <input class="btn btn-warning" role=button  type="submit" value="Login"/>
+</form>
+</div>
+</body>
+</html>

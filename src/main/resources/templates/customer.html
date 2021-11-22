@@ -1,0 +1,62 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title th:text="Customer + ' ' + ${customer.getId()}">Single customer</title>-->
+<!--    <link th:href="@{/css/project-css.css}" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>-->
+
+<!--<div class="items-table">-->
+<!--    <a href="#" class="btn btn-warning" role=button th:href="@{/customers}" th:text="#{navigation.all-customers}">back</a>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <h2 th:text="Customer + ' ' + ${customer.getId()}">customer</h2>-->
+
+<!--    <table class="table table-hover">-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.id}">#</th>-->
+<!--            <th th:href="${parcel.getId()}" th:text="${parcel.id}">Parcel Id</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.customer-username}">Purchaser</th>-->
+<!--            <th th:text="${parcel.getPurchaser().getUsername()}">Purchaser</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.customer-name}">Purchaser</th>-->
+<!--            <th th:text="${parcel.getPurchaser().getFirstName() + ' ' + parcel.getPurchaser().getLastName()}">-->
+<!--            </th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.customer-email}">Purchaser email</th>-->
+<!--            <th th:text="${parcel.getPurchaser().getEmail()}">-->
+<!--            </th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.weight}">Weight</th>-->
+<!--            <th th:text="${parcel.getWeight()}">Weight</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.destination-warehouse}">Destination Warehouse</th>-->
+<!--            <th th:text="${parcel.getDestinationWarehouse().getAddress().getStreetName()-->
+<!--            + ', ' + parcel.getDestinationWarehouse().getAddress().getCity().getName()-->
+<!--            + ', ' + parcel.getDestinationWarehouse().getAddress().getCity().getCountry().getName()}">Destination warehousе-->
+<!--            </th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.category}">Category</th>-->
+<!--            <th th:text="${parcel.getCategory().getName()}">Category</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>-->
+<!--            <td th:text="${parcel.getDeliveryType()}">Delivery Type</td>-->
+
+<!--        </tr>-->
+<!--    </table>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

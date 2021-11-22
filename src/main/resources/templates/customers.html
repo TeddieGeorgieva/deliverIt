@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div th:if="${customers.isEmpty()}">
+    <h2 th:text="#{customers.empty}">No customers</h2>
+</div>
+
+<form class="margin-top col-12 " action="#" th:action="@{/customers}" th:method="post" th:object="${searchCustomerDto}">
+    <div class="search-form">
+        <div class="search-input">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="searchByFilters" checked>
+            <label class="form-check-label" for="searchByFilters">
+                Search by filters
+            </label>
+        </div>
+        <div class="search-input">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="searchByAll">
+            <label class="form-check-label" for="searchByAll">
+                Search all fields
+            </label>
+        </div>
+    </div>
+    <div id="searchAllFieldsContainer" class="search-all formContainer">
+        <div class="input-group">
+            <span class="input-group-text">Search By all fields</span>
+            <input th:field="*{searchAll}" type="text" class="form-control" placeholder="Search" aria-label="Search"
+                   aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div id="searchFiltersContainer" class="search-all formContainer">
+        <div class="search-input-form">
+            <span class="input-group-text">Email</span>
+            <input th:field="*{email}" type="text" class="form-control" placeholder="Email" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+
+        <div class="search-input-form">
+            <span class="input-group-text">First name</span>
+            <input th:field="*{firstName}" type="text" class="form-control" placeholder="First name"
+                   aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+
+        <div class="search-input-form">
+            <span class="input-group-text">Last name</span>
+            <input th:field="*{lastName}" type="text" class="form-control" placeholder="Last name" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div class="container-button">
+        <div class="center-button">
+            <button class="button btn btn-success" type="submit">Search</button>
+        </div>
+    </div>
+
+</form>
+
+<div class="items-table" th:unless="${customers.isEmpty()}">
+    <h2 th:text="#{customers.title}">All customers</h2>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{customer.label.username}">Username</th>
+            <th scope="col" th:text="#{customer.label.firstName}">First name</th>
+            <th scope="col" th:text="#{customer.label.lastName}">Last name</th>
+            <th scope="col" th:text="#{customer.label.email}">Email</th>
+            <th scope="col" th:text="#{customer.label.addressForDelivery}">Address for delivery</th>
+        </tr>
+        </thead>
+
+        <tbody th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.getUsername()}">username</td>
+            <td th:text="${customer.getFirstName()}">first name</td>
+            <td th:text="${customer.getLastName()}">last name</td>
+            <td th:text="${customer.getEmail()}">email</td>
+            <td th:text="${customer.getAddressForDelivery().getStreetName()
+            + ', ' + customer.getAddressForDelivery().getCity().getName()
+            + ', ' + customer.getAddressForDelivery().getCity().getCountry().getName()}">address for delivery
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="application/javascript">
+    if ($("#email").val() !== "" || $("#firstName").val() !== "" || $("#lastName").val() !== "") {
+        showFilters();
+    } else if ($("#searchAll").val() !== "") {
+        showSearchAll();
+    } else {
+        showFilters();
+    }
+
+    function showFilters() {
+        //reset fields
+        $("#searchAll").val("");
+
+        //handle radio button
+        $("#searchByAll").prop('checked', false);
+        $("#searchByFilters").prop('checked', true);
+
+        $(".formContainer").hide();
+        $(".formContainer#searchFiltersContainer").show();
+    }
+
+    function showSearchAll() {
+        //reset fields
+        $("#email").val("");
+        $("#firstName").val("");
+        $("#lastName").val("");
+
+        //handle radio button
+        $("#searchByAll").prop('checked', true);
+        $("#searchByFilters").prop('checked', false);
+
+        $(".formContainer").hide();
+        $(".formContainer#searchAllFieldsContainer").show();
+    }
+
+    $("#searchByFilters").click(function (e) {
+        showFilters();
+    })
+    $("#searchByAll").click(function (e) {
+        showSearchAll();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Title</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}" href="../../static/assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+            th:href="@{https://use.fontawesome.com/releases/v5.15.4/js/all.js}" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          th:href="@{https://fonts.googleapis.com/css?family=Montserrat:400,700}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+          th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700}" rel="stylesheet"
+          type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav th:fragment="navbar-fragment" class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" th:href="@{/}">DeliverIt</a>
+        <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isEmployee}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#" th:href="@{/customers/}">Customers</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isEmployee}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#" th:href="@{/parcels/}">Parcels</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isCustomer}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                           href="#" th:href="@{/parcels/my}">My parcels</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isEmployee}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#" th:href="@{/shipments/}">Shipments</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isEmployee}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#" th:href="@{/warehouses/}">Warehouses</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isAuthenticated}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                                href="#" th:href="@{/countries/}">Countries</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isAuthenticated}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                                href="#" th:href="@{/cities/}">Cities</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:unless="${isAuthenticated}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     href="#" th:href="@{/auth/login/}">Login</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:if="${isAuthenticated}" ><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                     th:href="@{/auth/logout}" href="#">Logout</a></li>
+                <li class="nav-item mx-0 mx-lg-1" th:unless="${isAuthenticated}"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                                                                    href="#" th:href="@{/auth/register/}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Bootstrap core JS-->
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js}"></script>
+<!-- Core theme JS-->
+<script th:src="@{/js/scripts.js}"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script th:src="@{https://cdn.startbootstrap.com/sb-forms-latest.js}"></script>
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</body>
+</html>

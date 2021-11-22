@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${warehouseId}">Warehouse</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+
+<form class="warehouse" th:action="@{/warehouses/{id}/update(id=${warehouseId})}" th:object="${warehouseDto}"
+      method="post">
+    <h3>Update Warehouse</h3>
+
+    <div class="form-group">
+        <label for="address">Address</label>
+        <select class="form-control" id="address" th:field="*{addressId}">
+            <option th:each="address : ${addresses}" th:value="${address.value}"
+                    th:text="${address.key}"></option>
+        </select>
+    </div>
+    <br>
+    <td><a class="btn btn-warning" role=button th:href="@{/warehouses}"
+           th:text="#{navigation.back-to-all}">Back to All</a></td>
+
+    <td>
+        <button type="submit" class="btn btn-warning" role=button th:text="#{navigation.update-shipment}">Update
+        </button>
+    </td>
+</form>
+
+</body>
+</html>

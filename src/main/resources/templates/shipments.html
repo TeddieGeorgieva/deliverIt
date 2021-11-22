@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shipments</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+
+<form class="margin-top col-12 " action="#" th:action="@{/shipments}" th:object="${searchShipmentDto}" th:method="post">
+
+    <div class="search-form">
+        <label for="customer">Customer</label>
+        <select class="form-control" id="customer" th:field="*{customerId}">
+            <option value="">No customer</option>
+            <option th:each="customer : ${customers}" th:value="${customer.value}"
+                    th:text="${customer.key}"></option>
+        </select>
+    </div>
+
+    <div class="search-form">
+        <label for="destinationWarehouse">Origin warehouse</label>
+        <select class="form-control" id="destinationWarehouse" th:field="*{destinationWarehouseId}">
+            <option value="">No warehouse</option>
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+
+    <div class="search-form">
+        <label for="originWarehouse">Destination warehouse</label>
+        <select class="form-control" id="originWarehouse" th:field="*{originWarehouseId}">
+            <option value="">No warehouse</option>
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+    <div class="container-button">
+        <div class="center-button">
+            <button class="button btn btn-success" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<div th:if="${shipments.isEmpty()}">
+    <h2 th:text="#{shipments.title.empty}">No Shipments</h2>
+</div>
+<div class="items-table" th:unless="${shipments.isEmpty()}">
+    <h2 th:text="#{shipments.title}">All Shipments</h2>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{shipment.label.id}">#</th>
+            <th scope="col" th:text="#{shipment.label.status}">#</th>
+            <th scope="col" th:text="#{shipment.label.origin-warehouse}">Origin Warehouse</th>
+            <th scope="col" th:text="#{shipment.label.destination-warehouse}">Destination warehouse</th>
+            <th scope="col" th:text="#{shipment.label.departure-date}">Departure date</th>
+            <th scope="col" th:text="#{shipment.label.arrival-date}">Arrival date</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody th:each="shipment : ${shipments}">
+        <tr>
+            <td th:href="@{/shipments/{id}(id=${shipment.getId()})}" th:text="${shipment.id}">Shipment Id</td>
+            <td th:text="${shipment.getStatus()}">Status</td>
+            <td th:text="${shipment.getOriginWarehouse().getAddress().getCity().getName()}">Origin warehouse</td>
+            <td th:text="${shipment.getDestinationWarehouse().getAddress().getCity().getName()}">Destination warehouse</td>
+            <td th:text="${shipment.getDepartureDate}">Departure Date</td>
+            <td th:text="${shipment.getArrivalDate}">Arrival Date</td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments/{id}(id=${shipment.getId()})}" th:text="#{navigation.view-shipment}">View</a></td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments/update/{id}(id=${shipment.getId()})}" th:text="#{navigation.update-shipment}">Update</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="#" class="btn btn-warning" role=button th:href="@{/shipments/new}" th:text="#{navigation.create-shipment}">Create
+        a new shipment</a>
+
+</div>
+</body>
+</html>

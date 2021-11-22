@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${parcelId}">edit parcel</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<form class="parcel" th:action="@{__${#httpServletRequest.requestURI}__}" th:object="${parcelDto}" method="post">
+    <h3>Update Parcel</h3>
+
+    <div class="form-group">
+        <label for="purchaser">Purchaser username</label>
+        <input class="form-control" id="purchaser" type="text" th:field="*{purchaserUsername}">
+        <label class="error error-fields" th:errors="*{purchaserUsername}"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="weight">Weight</label>
+        <input class="form-control" id="weight" type="text" th:field="*{weight}">
+        <label class="error error-fields" th:errors="*{weight}"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="destinationWarehouse">Destination warehouse</label>
+        <select class="form-control" id="destinationWarehouse" th:field="*{destinationWarehouseId}">
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+        <label class="error error-fields" th:errors="*{destinationWarehouseId}"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" th:field="*{categoryId}">
+            <option th:each="category : ${categories}" th:value="${category.value}"
+                    th:text="${category.key}"></option>
+        </select>
+        <label class="error error-fields" th:errors="*{categoryId}"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="shipment">Shipment</label>
+        <select class="form-control" id="shipment" th:field="*{shipmentId}">
+            <option th:each="shipment : ${shipments}" th:value="${shipment.value}"
+                    th:text="${shipment.key}"></option>
+        </select>
+        <label class="error error-fields" th:errors="*{deliveryType}"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="deliveryType">Delivery type</label>
+        <select class="form-control" id="deliveryType" th:field="*{deliveryType}">
+            <option th:each="deliveryType : ${deliveryTypes}" th:value="${#strings.toUpperCase(deliveryType)}"
+                    th:text="${deliveryType}"></option>
+        </select>
+    </div>
+    <br>
+
+    <div class="container-button">
+        <div class="center-button">
+            <button class="button btn btn-success" type="submit">Update</button>
+            <button class="btn btn-warning" role=button th:href="@{/parcels}"
+                    th:text="#{navigation.back-to-all}">Back to All></button>
+        </div>
+    </div>
+
+<!--    <td><input type="submit" class="btn btn-warning" role=button/></td>-->
+<!--    <td><a class="btn btn-warning" role=button th:href="@{/parcels}"-->
+<!--           th:text="#{navigation.back-to-all}">Back to All</a></td>-->
+</form>
+</body>
+</html>

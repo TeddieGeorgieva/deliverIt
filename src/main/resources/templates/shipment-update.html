@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${shipmentId}">Shipment</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<form class="shipment"  th:action="@{__${#httpServletRequest.requestURI}__}" th:object="${shipmentDto}" method="post">
+    <h3>Update Shipment</h3>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" id="status" th:field="*{status}">
+            <option th:each="status : ${statuses}" th:value="${#strings.toUpperCase(status)}"
+                    th:text="${status}"></option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="departureDate">Departure date</label>
+        <input class="form-control" id="departureDate" type="text" th:field="*{departureDate}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="arrivalDate">Arrival date</label>
+        <input class="form-control" id="arrivalDate" type="text" th:field="*{arrivalDate}">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="originWarehouse">Origin warehouse</label>
+        <select class="form-control" id="originWarehouse" th:field="*{originWarehouseId}">
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="destinationWarehouse">Destination warehouse</label>
+        <select class="form-control" id="destinationWarehouse" th:field="*{destinationWarehouseId}">
+            <option th:each="warehouse : ${warehouses}" th:value="${warehouse.value}"
+                    th:text="${warehouse.key}"></option>
+        </select>
+    </div>
+    <br>
+    <td><a class="btn btn-warning" role=button th:href="@{/shipments}"
+           th:text="#{navigation.back-to-all}">Back to All</a></td>
+
+    <td><button type="submit" class="btn btn-warning" role=button th:text="#{navigation.update-shipment}">Update</button></td>
+</form>
+<div class="items-table">
+    <table class="table">
+        <h3>Parcels in this shipment</h3>
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{parcel.label.id}">#</th>
+            <th scope="col" th:text="#{parcel.label.customer-name}">Purchaser</th>
+            <th scope="col" th:text="#{parcel.label.category}">Departure date</th>
+            <th scope="col" th:text="#{parcel.label.delivery-type}">Delivery type</th>
+            <th scope="col" th:text="#{parcel.label.weight}">Arrival date</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parcel: ${parcels}">
+            <td><span th:text="${parcel.id}"></span></td>
+            <td>
+                <span th:text="${parcel.purchaser.firstName}"></span>
+                <span th:text="${parcel.purchaser.lastName}"></span>
+            </td>
+            <td><span th:text="${parcel.category.name}"></span></td>
+            <td><span th:text="${parcel.deliveryType.toString()}"></span></td>
+            <td><span th:text="*{parcel.weight}"></span></td>
+            <td><a href="#" class="btn btn-warning" role=button  th:href="@{__${#httpServletRequest.requestURI}__/delete}" th:text="#{navigation.delete-parcel}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

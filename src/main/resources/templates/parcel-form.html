@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcel Form Fragment</title>
+</head>
+<body>
+<form th:fragment="parcel-form" action="#" th:action="@{__${#httpServletRequest.requestURI}__}" th:object="${parcelDto}" method="post">
+<!--    <label th:text="#{parcel.label.customer-username}">Purchaser</label>-->
+<!--    <br/>-->
+<!--    <input type="text" th:field="*{purchaser}"/>-->
+<!--    <label class="error" th:errors="*{purchaser}">purchaser error placeholder</label>-->
+<!--    <br/><br/>-->
+
+<!--    <label th:text="#{parcel.label.weight}">ABV</label>-->
+<!--    <br/>-->
+<!--    <input type="text" th:field="*{weight}"/>-->
+<!--    <label class="error" th:errors="*{weight}">weight error placeholder</label>-->
+<!--    <br/><br/>-->
+
+<!--    <label th:text="#{beer.label.style}">Style</label>-->
+<!--    <br/>-->
+<!--    <select th:field="*{styleId}">-->
+<!--        <option th:each="style : ${styles}"-->
+<!--                th:value="${style.getId()}"-->
+<!--                th:text="${style.getName()}">-->
+<!--            BeerStyleOne-->
+<!--        </option>-->
+<!--    </select>-->
+<!--    <label class="error" th:errors="*{styleId}">Style error placeholder</label>-->
+    <br/><br/>
+
+    <input type="submit" value="Save"/>
+</form>
+</body>
+</html>

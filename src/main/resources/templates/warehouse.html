@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div class="shipment">
+    <h3>Warehouse preview</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{warehouse.address.country}">Country</th>
+            <th scope="col" th:text="#{warehouse.address.city}">City</th>
+            <th scope="col" th:text="#{warehouse.address.street-name}">Street name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><span th:text="${country}"></span></td>
+            <td><span th:text="${city}"></span></td>
+            <td><span th:text="${streetName}"></span></td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{/warehouses/{id}/update(id=${warehouse.id})}"
+                   th:text="#{navigation.update-shipment}">Update</a></td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{__${#httpServletRequest.requestURI}__/delete}"
+                   th:text="#{navigation.delete-shipment}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div th:if="${shipments.isEmpty()}">
+        <h2 th:text="#{shipments.title.empty}">No Shipments</h2>
+    </div>
+    <table class="table" th:unless="${shipments.isEmpty()}">
+        <h2 th:text="#{shipments.title.in-warehouse}">Shipments in this warehouse</h2>
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{shipment.label.id}">#</th>
+            <th scope="col" th:text="#{shipment.label.destination-warehouse}">Destination warehouse</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="shipment : ${shipments}">
+            <td><span th:text="${shipment.id}">#</span></td>
+            <td><span th:text="${shipment.getDestinationWarehouse().getAddress().getCity().getName()}">City</span></td>
+            <td><a href="#" class="btn btn-warning" role=button th:href="@{/shipments/{id}(id=${shipment.getId()})}" th:text="#{navigation.view-shipment}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <td><a href="#" class="btn btn-warning" role=button th:href="@{/warehouses}"
+           th:text="#{navigation.back-to-all}">Back to All</a></td>
+    <td><a href="#" class="btn btn-warning" role=button th:href="@{/warehouses/{id}/nextArriving(id=${warehouse.getId()})}"
+           th:text="#{warehouses.next-shipment}">next shipment</a></td>
+
+</div>
+
+</body>
+</html>

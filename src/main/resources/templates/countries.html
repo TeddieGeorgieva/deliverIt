@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries</title>
+    <link th:href="@{/css/project-css.css}" rel="stylesheet">
+</head>
+<body>
+<div th:insert="fragments/navbar.html" th:fragment="navbar"></div>
+
+<div th:if="${countries.isEmpty()}">
+    <h2 th:text="#{countries.empty}">No countries</h2>
+</div>
+
+<div class="items-table" th:unless="${countries.isEmpty()}">
+    <h2 th:text="#{countries.title}">All countries</h2>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{country.label.name}">Country</th>
+        </tr>
+        </thead>
+
+        <tbody th:each="country : ${countries}">
+        <tr>
+            <td th:text="${country.getName()}">Country</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
