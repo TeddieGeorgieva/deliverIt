@@ -37,6 +37,3 @@ http://localhost:8080/swagger-ui/#/
 ## Running tests
 To run the tests:
 - Click on Project, then right-click on tests package and choose 'Run all tests'.
-
-## Acknowledgements
-This project is an assignment from the [Telerik Academy](https://www.telerikacademy.com/) Alpha program.
